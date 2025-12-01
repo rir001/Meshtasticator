@@ -47,4 +47,4 @@ pydevd*.log
 nodeLanguageServer/**
 nodeLanguageServer.*/**
 dist/**
-program
+program*

@@ -9,8 +9,8 @@ try:
 except ImportError:
     print('Tkinter is needed. Install python3-tk with your package manager.')
 
-hopLimits = [1, 2, 3, 4, 5, 6, 7]
-nrNodes = [3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 25]
+hopLimits = [3,]
+nrNodes = [3, 5, 10, 15, 30]
 collisionRates = [[] for _ in hopLimits]
 collisionStds = [[] for _ in hopLimits]
 reachability = [[] for _ in hopLimits]
@@ -25,7 +25,7 @@ txAirUtilsStds = [[] for _ in hopLimits]
 
 for hi, h in enumerate(hopLimits):
     for n in nrNodes:
-        fname = "out/report/hopLimit"+str(h)+"/simReport_5_"+str(n)+".csv"
+        fname = "out/report/hopLimit"+str(h)+"/simReport_4_"+str(n)+".csv"
         data = pd.read_csv(fname, header=0)
         collisionRates[hi].append(np.nanmean(data["CollisionRate"]))
         collisionStds[hi].append(np.nanstd(data["CollisionRate"]))
@@ -33,10 +33,10 @@ for hi, h in enumerate(hopLimits):
         reachabilityStds[hi].append(np.nanstd(data["Reachability"]))
         usefulness[hi].append(np.nanmean(data["Usefulness"]))
         usefulnessStds[hi].append(np.nanstd(data["Usefulness"]))
-        meanDelays[h].append(np.nanmean(data["meanDelay"]))
-        delayStds[h].append(np.nanstd(data["meanDelay"]))
-        meanTxAirUtils[h].append(np.nanmean(data["meanTxAirUtil"]))
-        txAirUtilsStds[h].append(np.nanstd(data["meanTxAirUtil"]))
+        meanDelays[hi].append(np.nanmean(data["meanDelay"]))
+        delayStds[hi].append(np.nanstd(data["meanDelay"]))
+        meanTxAirUtils[hi].append(np.nanmean(data["meanTxAirUtil"]))
+        txAirUtilsStds[hi].append(np.nanstd(data["meanTxAirUtil"]))
 
 for hi, h in enumerate(hopLimits):
     plt.errorbar(nrNodes, collisionRates[hi], collisionStds[hi], color=plt.cm.Set1(h), capsize=3, elinewidth=0.5, capthick=0.5, label=str(h))

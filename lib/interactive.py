@@ -442,7 +442,7 @@ class InteractiveSim:
                 call.append("&")
                 os.system(" ".join(call))
                 if self.emulateCollisions and n.nodeid != len(self.nodes) - 1:
-                    time.sleep(2)  # Wait a bit to avoid immediate collisions when starting multiple nodes
+                    time.sleep(6)  # Wait a bit to avoid immediate collisions when starting multiple nodes
 
     def init_forward(self):
         if self.forwardToClient:
@@ -481,7 +481,7 @@ class InteractiveSim:
             for n in self.nodes:
                 n.set_config()
                 if self.emulateCollisions and n.nodeid != len(self.nodes) - 1:
-                    time.sleep(2)  # Wait a bit to avoid immediate collisions when starting multiple nodes
+                    time.sleep(6)  # Wait a bit to avoid immediate collisions when starting multiple nodes
             self.reconnect_nodes()
             pub.subscribe(self.on_receive, "meshtastic.receive.simulator")
             pub.subscribe(self.on_receive_metrics, "meshtastic.receive.telemetry")
@@ -510,7 +510,7 @@ class InteractiveSim:
                     print("Trying to reconnect to node...")
                     time.sleep(1)
             if self.emulateCollisions and n.nodeid != len(self.nodes)-1:
-                time.sleep(2)  # Wait a bit to avoid immediate collisions when starting multiple nodes
+                time.sleep(6)  # Wait a bit to avoid immediate collisions when starting multiple nodes
 
     @staticmethod
     def packet_from_packet(packet, data, portnum):

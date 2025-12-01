@@ -22,7 +22,7 @@ from lib.node import MeshNode
 # TODO - There should really be two separate concepts here, a STATE and a CONFIG
 # today, the config also maintains state
 conf = Config()
-VERBOSE = False
+VERBOSE = True
 SHOW_GRAPH = False
 SAVE = True
 
@@ -41,7 +41,7 @@ def verboseprint(*args, **kwargs):
 routerTypes = [conf.ROUTER_TYPE.MANAGED_FLOOD]
 
 # How many times should each combination run
-repetitions = 3
+repetitions = 4
 
 # How many nodes should be simulated in each test
 numberOfNodes = [3, 5, 10, 15, 30]
