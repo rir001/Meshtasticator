@@ -5,7 +5,18 @@
 ### Numero de nodos
 Para 4 nodos funciona bien, para más de esto es necesario aumentar el lsof del terminal donde se ejecuta:
 ```
-ulimit -n 16384
+ulimit -n 65536
+sudo sysctl -w net.core.rmem_max=26214400
+sudo sysctl -w net.core.rmem_default=26214400
+
+sudo sysctl -w net.core.wmem_max=26214400
+sudo sysctl -w net.core.wmem_default=26214400
+
+sudo sysctl -w net.core.netdev_max_backlog=10000
+
+sudo ip link set lo txqueuelen 20000
+
+sudo sysctl -w net.ipv4.igmp_max_memberships=100
 ```
 
 Esto corrige el problema pero se espera encontrar una solución alternativa.
@@ -75,4 +86,8 @@ python interactiveSim.py -s --from-file
 
 
 
-ulimit -n 65536
+
+
+watch -n 0.5 'ss -tulpn | grep program'
+
+
