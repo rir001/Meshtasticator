@@ -8,7 +8,7 @@ import os
 import time
 import argparse
 from lib.interactive import CommandProcessor
-from lib.interactive_custom import InteractiveSim
+from lib.interactive import InteractiveSim
 
 parser = argparse.ArgumentParser(prog='interactiveSim')
 parser.add_argument('-s', '--script', action='store_true')
@@ -34,31 +34,6 @@ if sim.script:
         time.sleep(t)
         sim.show_nodes()
 
-        print("\n--- Ejecutando análisis de red completo ---")
-        
-        # Ejecutar traceroute entre todas las combinaciones de nodos
-        sim.traceroute_all_combinations(wait_time=10)
-        sim.show_nodes()
-        
-        # Ejecutar pings entre todas las combinaciones de nodos
-        sim.ping_all_combinations(wait_time=10)
-        
-        # Mostrar análisis de resultados
-        sim.print_network_analysis()
-        
-        # Obtener análisis programático si se necesita
-        analysis = sim.get_network_analysis()
-        if analysis:
-            print(f"\n--- Resumen Final ---")
-            print(f"Latencia Máxima: {analysis['max_rtt']['value']:.2f}s entre N{analysis['max_rtt']['pair'][0]} y N{analysis['max_rtt']['pair'][1]}")
-            print(f"Saltos Máximos: {analysis['max_hops']['value']} entre N{analysis['max_hops']['pair'][0]} y N{analysis['max_hops']['pair'][1]}")
-            
-            # Exportar resultados a CSV
-            sim.export_results_csv()
-
-        time.sleep(1)  # Wait until messages are sent
-        sim.graph.plot_metrics(sim.nodes)  # Plot airtime metrics
-        sim.graph.init_routes(sim)  # Visualize the route of messages sent
 
     except KeyboardInterrupt:
         sim.print_network_analysis()  # Show analysis on interrupt
